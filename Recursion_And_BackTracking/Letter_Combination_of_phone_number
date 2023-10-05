@@ -1,0 +1,39 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String>list=new ArrayList<>();
+        if(digits.length()==0)
+          return list;
+
+        HashMap<String,String>map=new HashMap<>();
+        map.put("2","abc");
+        map.put("3","def");
+        map.put("4","ghi");
+        map.put("5","jkl");
+        map.put("6","mno");
+        map.put("7","pqrs");
+        map.put("8","tuv");
+        map.put("9","wxyz");
+
+        Deque<String>deck=new ArrayDeque<>();
+        deck.add("");
+
+        for(int i=0;i<digits.length();i++){
+            String num=digits.substring(i,i+1);
+            String letters=map.get(num);
+
+            int n=deck.size();
+            for(int j=0;j<n;j++){
+                String curr=deck.pollFirst();
+                for(int k=0;k<letters.length();k++){
+                    String res=curr.concat(letters.charAt(k)+"");
+                    deck.add(res);
+                }
+            }
+        }
+        while(!deck.isEmpty()){
+            list.add(deck.poll());
+        }
+        return list;
+
+    }
+}
