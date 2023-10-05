@@ -1,0 +1,23 @@
+class Solution {
+    ArrayList<String>list=new ArrayList<>();
+    public ArrayList<String> findPath(int[][] m, int n) {
+         boolean visited[][]=new boolean[n][n];
+         generate(0,0,"",m,n,visited);
+         return list;
+    }
+    void  generate(int row,int col,String curr,int[][] m,int n, boolean visited[][]){
+        if(row==n-1 && col==n-1 && m[n-1][n-1]==1){
+            list.add(curr);
+            return;
+        }
+        if(row<0 || col<0 || row>=n || col>=n || visited[row][col] || m[row][col]==0)
+          return;
+         visited[row][col]=true;
+         generate(row-1,col,curr+"U",m,n,visited);
+         generate(row+1,col,curr+"D",m,n,visited);
+         generate(row,col-1,curr+"L",m,n,visited);
+         generate(row,col+1,curr+"R",m,n,visited);
+         visited[row][col]=false;
+        
+    }
+}
