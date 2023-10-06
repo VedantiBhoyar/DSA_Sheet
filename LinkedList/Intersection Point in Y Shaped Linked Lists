@@ -25,16 +25,7 @@ Explanation:
   |
   NULL   
 
-Your Task:
-You don't need to read input or print anything. The task is to complete the function intersetPoint() which takes the pointer to the head of linklist1(head1) and linklist2(head2) as input parameters and returns data value of a node where two linked lists intersect. If linked list do not merge at any point, then it should return -1.
-Challenge : Try to solve the problem without using any extra space.
 
-Expected Time Complexity: O(N+M)
-Expected Auxiliary Space: O(1)
-
-Constraints:
-1 ≤ N + M ≤ 2*105
--1000 ≤ value ≤ 1000
 
 */
 
@@ -68,7 +59,9 @@ class Intersect
            curr1=shift(curr1,diff);
          else
           curr2=shift(curr2,diff);
-          
+
+// checking if the linkedlist have same nodes
+
         while(curr1!=null && curr2!=null){
             
             if(curr1==curr2)
@@ -79,6 +72,9 @@ class Intersect
         }
         return -1;
 	}
+
+// calculating the length of linkedlist
+
 	int size(Node head){
         Node curr=head;
         int len=0;
@@ -88,6 +84,9 @@ class Intersect
         }
         return len;
     }
+
+// Shifting the greater linkedlist 'diff' times
+
     Node shift(Node head,int diff){
        for(int i=0;i<diff;i++)
           head=head.next;
