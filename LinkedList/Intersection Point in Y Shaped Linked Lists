@@ -1,0 +1,100 @@
+/* 
+
+Question
+Given two singly linked lists of size N and M, write a program to get the point where two linked lists intersect each other.
+
+Example 1:
+
+Input: 
+Linked List 1 = 4->1->common
+Linked List 2 = 5->6->1->common
+common = 8->4->5->NULL
+Output: 8
+
+Explanation: 
+
+4              5
+|              |
+1              6
+ \             /
+  8   -----  1 
+   |
+   4
+   |
+  5
+  |
+  NULL   
+
+Your Task:
+You don't need to read input or print anything. The task is to complete the function intersetPoint() which takes the pointer to the head of linklist1(head1) and linklist2(head2) as input parameters and returns data value of a node where two linked lists intersect. If linked list do not merge at any point, then it should return -1.
+Challenge : Try to solve the problem without using any extra space.
+
+Expected Time Complexity: O(N+M)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+1 ≤ N + M ≤ 2*105
+-1000 ≤ value ≤ 1000
+
+*/
+
+// Solution
+
+/* Node of a linked list
+ class Node {
+   int data;
+    Node next;
+    Node(int d)  { data = d;  next = null; }
+}
+ Linked List class
+class LinkedList
+{
+    Node head;  // head of list
+}*/
+
+class Intersect
+{
+    //Function to find intersection point in Y shaped Linked Lists.
+	int intersectPoint(Node head1, Node head2)
+	{
+         
+         Node curr1=head1,curr2=head2;
+         int len1=size(curr1);
+         int len2=size(curr2);
+         
+         int diff=Math.abs(len1-len2);
+         
+         if(len1>len2)
+           curr1=shift(curr1,diff);
+         else
+          curr2=shift(curr2,diff);
+          
+        while(curr1!=null && curr2!=null){
+            
+            if(curr1==curr2)
+              return curr1.data;
+              
+             curr1=curr1.next;
+             curr2=curr2.next;
+        }
+        return -1;
+	}
+	int size(Node head){
+        Node curr=head;
+        int len=0;
+        while(curr!=null){
+            len++;
+            curr=curr.next;
+        }
+        return len;
+    }
+    Node shift(Node head,int diff){
+       for(int i=0;i<diff;i++)
+          head=head.next;
+        return head;
+    }
+}
+
+
+
+
