@@ -1,0 +1,26 @@
+class Solution 
+{ 
+    long getSubstringWithEqual012(String str) 
+    { 
+        // code here
+        HashMap<String,Integer>map=new HashMap<>();
+        map.put("0*0",1);
+        int ans=0;
+        int count0=0,count1=0,count2=0;
+        for(int i=0;i<str.length();i++){
+            char ch=str.charAt(i);
+            if(ch=='0')
+              count0++;
+            else if(ch=='1')
+              count1++;
+            else
+              count2++;
+            
+            String key = (count0-count1)+"*"+(count0-count2);
+            ans += map.getOrDefault(key, 0);
+            map.put(key, map.getOrDefault(key, 0) + 1);
+            
+        }
+        return ans;
+    }
+} 
