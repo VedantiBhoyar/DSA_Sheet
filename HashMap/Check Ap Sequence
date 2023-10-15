@@ -1,0 +1,34 @@
+class Solution
+{
+    boolean checkIsAP(int arr[] ,int n)
+    {
+        // code here
+        HashMap<Integer,Integer>map=new HashMap<>();
+        int smallest=Integer.MAX_VALUE,second_smallest=Integer.MAX_VALUE;
+        
+        for(int i=0;i<n;i++){
+            if(smallest>arr[i]){
+                second_smallest=smallest;
+                smallest=arr[i];
+            }
+            else if(arr[i]!=smallest && second_smallest>arr[i]){
+                second_smallest=arr[i];
+            }
+            if(!map.containsKey(arr[i]))
+              map.put(arr[i],1);
+        }
+        
+        if(second_smallest==Integer.MAX_VALUE)
+           second_smallest=smallest;
+           
+        int diff=second_smallest-smallest;
+        for(int i=0;i<n-1;i++){
+            if(!map.containsKey(second_smallest))
+               return false;
+            second_smallest+=diff;
+        }
+        return true;
+
+    
+    }
+}
