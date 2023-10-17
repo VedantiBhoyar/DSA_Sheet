@@ -1,0 +1,44 @@
+class Solution {
+    public int nextGreaterElement(int n) {
+        String num=String.valueOf(n);
+        int len=num.length();
+        int firstDeflectionPoint=-1,secondDeflectionPoint=-1;
+        int currMax=num.charAt(len-1)-'0';
+        for(int i=len-2;i>=0;i--){
+            if(num.charAt(i)-'0'<currMax){
+                firstDeflectionPoint=i;
+                break;
+            }
+            currMax=num.charAt(i)-'0';
+        }
+        if(firstDeflectionPoint==-1)
+          return -1;
+        int min=10;
+        for(int i=firstDeflectionPoint+1;i<len;i++){
+            int val=num.charAt(i)-'0';
+            if(val>num.charAt(firstDeflectionPoint)-'0' && val<min){
+                secondDeflectionPoint=i;
+                min=val;
+            }
+        }
+        if(secondDeflectionPoint==-1)
+          return -1;
+        char arr[]=num.toCharArray();
+
+        char temp = arr[firstDeflectionPoint];
+        arr[firstDeflectionPoint] = arr[secondDeflectionPoint];
+        arr[secondDeflectionPoint] = temp;
+
+        Arrays.sort(arr,firstDeflectionPoint+1,len);
+        String resultStr = new String(arr);
+
+        try {
+            int result = Integer.parseInt(resultStr);
+            return result;
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+        
+    }
+    
+}
