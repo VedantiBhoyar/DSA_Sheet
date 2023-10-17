@@ -1,0 +1,42 @@
+class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        List<Integer>list=new ArrayList<>();
+        int n=nums.length;
+        int firstCandidate=Integer.MAX_VALUE, firstVote=0;
+        int secondCandidate=Integer.MAX_VALUE, secondVote=0;
+
+        for(int i=0;i<n;i++){
+            if(nums[i]==firstCandidate){
+                firstVote++;
+            }
+            else if(nums[i]==secondCandidate){
+                secondVote++;
+            }
+            else if(firstVote==0){
+                firstCandidate=nums[i];
+                firstVote=1;
+            }
+            else if(secondVote==0){
+                secondCandidate=nums[i];
+                secondVote=1;
+            }
+            else{
+                firstVote--;
+                secondVote--;
+            }
+        }
+        int count1=0,count2=0;
+        for(int i=0;i<n;i++){
+            if(firstCandidate==nums[i])
+              count1++;
+            else if(secondCandidate==nums[i])
+              count2++;
+        }
+        if(count1>n/3)
+          list.add(firstCandidate);
+        if(count2>n/3)
+          list.add(secondCandidate);
+        return list;
+        
+    }
+}
