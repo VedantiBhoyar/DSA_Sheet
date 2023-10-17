@@ -1,0 +1,19 @@
+public class Solution {
+    public int[] solve(int A, int[][] B) {
+        int res[]=new int[A];
+        int n=B.length;
+        for(int i=0;i<n;i++){
+            int s=B[i][0]-1;
+            int e=B[i][1];
+            int value=B[i][2];
+
+            res[s]=res[s]+value;
+            if(e<A)
+              res[e]=res[e]-value;
+        }
+
+        for(int i=1;i<A;i++)
+          res[i]=res[i]+res[i-1];
+        return res;
+    }
+}
