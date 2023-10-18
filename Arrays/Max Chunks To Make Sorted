@@ -1,0 +1,12 @@
+class Solution {
+    public int maxChunksToSorted(int[] arr) {
+        int res=0,currMax=arr[0];
+        for(int i=0;i<arr.length;i++){
+            currMax=Math.max(arr[i],currMax);
+            if(currMax==i)
+              res++;
+        }
+        return res;
+        
+    }
+}
