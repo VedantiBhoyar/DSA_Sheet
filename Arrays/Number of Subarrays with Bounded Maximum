@@ -1,0 +1,19 @@
+class Solution {
+    public int numSubarrayBoundedMax(int[] nums, int left, int right) {
+        int prev=0,ans=0,l=0;
+        for(int r=0;r<nums.length;r++){
+            if(nums[r]>right){
+                l=r+1;
+                prev=0;
+            }  
+            else if(nums[r]<left)
+              ans+=prev;
+            else if(nums[r]>=left && nums[r]<=right){
+                 ans+=r-l+1;
+                 prev=r-l+1;
+            }
+        }
+        return ans;
+    }
+}
+
